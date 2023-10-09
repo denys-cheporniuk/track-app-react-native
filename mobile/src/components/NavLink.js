@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import Spacer from "./Spacer";
 
-const AuthRedirect = ({ redirectTo, content }) => {
+const NavLink = ({ redirectTo, content }) => {
   const navigation = useNavigation();
 
   return (
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AuthRedirect;
+export default NavLink;

@@ -1,3 +1,4 @@
+import {useContext, useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
@@ -13,7 +14,7 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
-import {useContext} from "react";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -43,9 +44,16 @@ const LoginFlow = () => (
 const App = () => {
   const { state } = useContext(AuthContext);
 
+  if (state.isLoading) {
+    return (
+      <ResolveAuthScreen />
+    )
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+
         {state.token ? (
           <Stack.Screen name="MainFlow" component={MainFlow} />
         ) : (

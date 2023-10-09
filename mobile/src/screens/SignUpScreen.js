@@ -1,39 +1,33 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
-import Spacer from "../components/Spacer";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm";
-import AuthRedirect from "../components/AuthRedirect";
+import NavLink from "../components/NavLink";
 
 const SignUpScreen = () => {
-  const { state, signUp } = useContext(AuthContext);
+  const { state, signUp, clearError } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   const submit = useCallback((email, password) => {
     signUp({email, password})
   }, [signUp])
 
+  useEffect(() => (
+    navigation.addListener('focus', clearError)
+  ), [navigation]);
+
   return (
     <View style={styles.container}>
-      <Spacer m16>
-        <Text h3>Sign Up for Tracker</Text>
-      </Spacer>
-
       <AuthForm
+        title="Sign Up for Tracker"
         onSubmit={submit}
-        title="Sign Up"
+        submitButtonText="Sign Up"
+        errorMessage={state.errorMessage}
       />
 
-      {state.errorMessage && (
-        <Spacer m16>
-          <Text style={styles.errorMessage}>
-            {state.errorMessage}
-          </Text>
-        </Spacer>
-      )}
-
-      <AuthRedirect
+      <NavLink
         redirectTo="SignIn"
         content="Already have an account? Sign in instead"
       />
@@ -46,11 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     marginBottom: 250,
-  },
-
-  errorMessage: {
-    fontSize: 16,
-    color: 'red',
   },
 })
 
