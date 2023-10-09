@@ -2,18 +2,24 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 
+import {
+  Provider as AuthProvider,
+  Context as AuthContext,
+} from "./src/context/AuthContext";
+
 import AccountScreen from "./src/screens/AccountScreen";
 import SignInScreen from "./src/screens/SignInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
+import {useContext} from "react";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const TrackListFlow = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="TrackList" component={TrackListScreen} />
     <Stack.Screen name="TrackDetail" component={TrackDetailScreen} />
   </Stack.Navigator>
@@ -21,26 +27,26 @@ const TrackListFlow = () => (
 
 const MainFlow = () => (
   <Tab.Navigator>
-    <Tab.Screen name="TrackListFlow" component={TrackListFlow} options={{ title: 'Tracks' }} />
+    <Tab.Screen name="TrackListFlow" component={TrackListFlow} />
     <Tab.Screen name="TrackCreate" component={TrackCreateScreen} />
     <Tab.Screen name="Account" component={AccountScreen} />
   </Tab.Navigator>
 );
 
 const LoginFlow = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="SignUp" component={SignUpScreen} />
     <Stack.Screen name="SignIn" component={SignInScreen} />
   </Stack.Navigator>
 );
 
 const App = () => {
-  const isUserLoggedIn = false;
+  const { state } = useContext(AuthContext);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerTitle: "Track App" }}>
-        {isUserLoggedIn ? (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {state.token ? (
           <Stack.Screen name="MainFlow" component={MainFlow} />
         ) : (
           <Stack.Screen name="LoginFlow" component={LoginFlow} />
@@ -50,4 +56,8 @@ const App = () => {
   );
 };
 
-export default App;
+export default () => (
+  <AuthProvider>
+    <App />
+  </AuthProvider>
+);
