@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
 import { Context as AuthContext } from "../context/AuthContext";
@@ -19,7 +19,7 @@ const SignUpScreen = () => {
   ), [navigation]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView>
       <AuthForm
         title="Sign Up for Tracker"
         onSubmit={submit}
@@ -31,16 +31,8 @@ const SignUpScreen = () => {
         redirectTo="SignIn"
         content="Already have an account? Sign in instead"
       />
-    </View>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    marginBottom: 250,
-  },
-})
 
 export default SignUpScreen;

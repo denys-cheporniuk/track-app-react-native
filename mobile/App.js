@@ -8,7 +8,7 @@ import {
   Context as AuthContext,
 } from "./src/context/AuthContext";
 
-import AccountScreen from "./src/screens/AccountScreen";
+import ProfileScreen from "./src/screens/ProfileScreen";
 import SignInScreen from "./src/screens/SignInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
@@ -30,7 +30,7 @@ const MainFlow = () => (
   <Tab.Navigator>
     <Tab.Screen name="TrackListFlow" component={TrackListFlow} />
     <Tab.Screen name="TrackCreate" component={TrackCreateScreen} />
-    <Tab.Screen name="Account" component={AccountScreen} />
+    <Tab.Screen name="Account" component={ProfileScreen} />
   </Tab.Navigator>
 );
 

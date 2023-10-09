@@ -6,6 +6,7 @@ import trackerApi from "../api/tracker";
 const ACTIONS_TYPES = {
   AUTH_ERROR: 'AUTH_ERROR',
   SIGN_IN: 'SIGN_IN',
+  SIGN_OUT: 'SIGN_OUT',
   CLEAR_MESSAGE: 'CLEAR_MESSAGE',
   STOP_LOADING: 'STOP_LOADING',
 }
@@ -21,6 +22,13 @@ const authReducer = (state, action) => {
         token: action.payload,
         errorMessage: '',
         isLoading: false,
+      }
+
+    case ACTIONS_TYPES.SIGN_OUT:
+      return {
+        ...state,
+        token: null,
+        errorMessage: '',
       }
 
     case ACTIONS_TYPES.STOP_LOADING:
@@ -73,13 +81,15 @@ const signIn = (dispatch) => async ({ email, password }) => {
 
 const signOut = (dispatch) => async () => {
   try {
+    await AsyncStorage.removeItem('@token');
 
+    dispatch({ type: ACTIONS_TYPES.SIGN_OUT })
   } catch (error) {
-
+    console.log(error);
   }
 }
 
-const clearError = (dispatch) => () => (
+const clearError = (dispatch) => async () => (
   dispatch({ type: ACTIONS_TYPES.CLEAR_MESSAGE, payload: '' })
 )
 
