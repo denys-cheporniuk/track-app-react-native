@@ -1,27 +1,44 @@
-import React, { useContext, useEffect } from 'react';
+import React, {useCallback, useContext, useEffect} from 'react';
 import { SafeAreaView } from 'react-native'
 import { Text } from 'react-native-elements';
-import { useNavigation, useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import { Context as LocationContext } from '../context/LocationContext'
 
 import Map from "../components/Map";
 import { useLocation } from "../hooks/useLocation";
+import TrackForm from "../components/TrackForm";
+import Spacer from "../components/Spacer";
 
 const TrackCreateScreen = () => {
-  const { addLocation } = useContext(LocationContext);
+  const { state, addLocation } = useContext(LocationContext);
   const isInFocus = useIsFocused();
-  const [locationError] = useLocation(isInFocus, addLocation);
-  const navigation = useNavigation();
+
+  const setLocation = useCallback((location) => {
+    addLocation(location, state.recording);
+  }, [state.recording])
+
+  const [locationError] = useLocation(isInFocus || state.recording, setLocation);
+
+  console.log(state.locations.length);
 
   return (
     <SafeAreaView>
-      <Text h3>TrackCreateScreen</Text>
+      <Spacer m16>
+        <Text h3 center>TrackCreateScreen</Text>
+      </Spacer>
+
       <Map />
 
+      <Spacer m16>
+        <TrackForm />
+      </Spacer>
+
       {locationError && (
-        <Text>
-          Please enable location service
-        </Text>
+        <Spacer m16>
+          <Text>
+            Please enable location service
+          </Text>
+        </Spacer>
       )}
     </SafeAreaView>
   );

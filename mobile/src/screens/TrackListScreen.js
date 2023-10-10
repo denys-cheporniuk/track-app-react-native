@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native'
+import { SafeAreaView, Text, StyleSheet, Button } from 'react-native'
 import {useNavigation} from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -7,7 +7,7 @@ const TrackListScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>TrackListScreen</Text>
 
       <Button
@@ -16,7 +16,7 @@ const TrackListScreen = () => {
           navigation.navigate('TrackDetail')
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

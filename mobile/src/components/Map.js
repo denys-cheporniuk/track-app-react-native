@@ -5,7 +5,7 @@ import { Context as LocationContext } from '../context/LocationContext'
 import Spacer from "./Spacer";
 
 const Map = () => {
-  const { state: { currentLocation } } = useContext(LocationContext);
+  const { state: { currentLocation, locations } } = useContext(LocationContext);
 
   if (!currentLocation) {
     return (
@@ -14,8 +14,6 @@ const Map = () => {
       </Spacer>
     )
   }
-
-  console.log(currentLocation);
 
   return (
     <View>
@@ -33,6 +31,10 @@ const Map = () => {
             radius={30}
             strokeColor="rgba(158, 158, 255, 0.3)"
             fillColor="rgba(158, 158, 255, 0.8)"
+          />
+
+          <Polyline
+            coordinates={locations.map(location => location.coords)}
           />
         </MapView>
       </Spacer>

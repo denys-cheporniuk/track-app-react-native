@@ -8,6 +8,7 @@ import {
   Context as AuthContext,
 } from "./src/context/AuthContext";
 import { Provider as LocationProvider } from "./src/context/LocationContext";
+import { Provider as TrackProvider } from "./src/context/TrackContext";
 
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SignInScreen from "./src/screens/SignInScreen";
@@ -66,9 +67,11 @@ const App = () => {
 };
 
 export default () => (
-  <LocationProvider>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </LocationProvider>
+  <TrackProvider>
+    <LocationProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </LocationProvider>
+  </TrackProvider>
 );

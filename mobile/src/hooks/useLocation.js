@@ -7,38 +7,47 @@ import {
 
 export const useLocation = (shouldTrack, callback) => {
   const [locationError, setLocationError] = useState('');
-  const [subscriber, setSubscriber] = useState(null);
-
-  const startWatching = async () => {
-    try {
-      const { granted } = await requestForegroundPermissionsAsync();
-
-      if (!granted) {
-        console.log('error');
-        throw new Error('Location permission not granted');
-      }
-
-      const sub = await watchPositionAsync({
-        accuracy: Accuracy.BestForNavigation,
-        timeInterval: 500,
-        distanceInterval: 10,
-      },
-        callback,
-      );
-
-      setSubscriber(sub);
-    } catch (e) {
-      setLocationError(e.message);
-    }
-  };
 
   useEffect(() => {
+    let subscriber;
+
+    const startWatching = async () => {
+      try {
+        const { granted } = await requestForegroundPermissionsAsync();
+
+        if (!granted) {
+          console.log('error');
+          throw new Error('Location permission not granted');
+        }
+
+        subscriber = await watchPositionAsync({
+            accuracy: Accuracy.BestForNavigation,
+            timeInterval: 500,
+            distanceInterval: 10,
+          },
+          callback,
+        );
+      } catch (e) {
+        setLocationError(e.message);
+      }
+    };
+
     if (shouldTrack) {
       startWatching();
     } else {
-      subscriber.remove();
+      if (subscriber) {
+        subscriber.remove();
+      }
+
+      subscriber = null;
     }
-  }, [shouldTrack])
+
+    return () => {
+      if (subscriber) {
+        subscriber.remove();
+      }
+    };
+  }, [shouldTrack, callback])
 
 
   return [locationError];
