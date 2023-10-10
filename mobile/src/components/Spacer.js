@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
   mb16: {
     marginBottom: 16,
   },
+  mt40: {
+    marginTop: 40,
+  },
 })
 
 export default Spacer;

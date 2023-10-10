@@ -16,7 +16,7 @@ const SignInScreen = () => {
 
   useEffect(() => (
     navigation.addListener('focus', clearError)
-  ), [navigation]);
+  ), [navigation, clearError]);
 
   return (
     <SafeAreaView>

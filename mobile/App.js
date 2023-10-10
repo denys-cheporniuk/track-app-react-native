@@ -7,6 +7,7 @@ import {
   Provider as AuthProvider,
   Context as AuthContext,
 } from "./src/context/AuthContext";
+import { Provider as LocationProvider } from "./src/context/LocationContext";
 
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SignInScreen from "./src/screens/SignInScreen";
@@ -30,7 +31,7 @@ const MainFlow = () => (
   <Tab.Navigator>
     <Tab.Screen name="TrackListFlow" component={TrackListFlow} />
     <Tab.Screen name="TrackCreate" component={TrackCreateScreen} />
-    <Tab.Screen name="Account" component={ProfileScreen} />
+    <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
 );
 
@@ -65,7 +66,9 @@ const App = () => {
 };
 
 export default () => (
-  <AuthProvider>
-    <App />
-  </AuthProvider>
+  <LocationProvider>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </LocationProvider>
 );
