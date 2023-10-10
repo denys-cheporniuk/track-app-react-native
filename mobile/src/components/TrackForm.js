@@ -66,7 +66,7 @@ const TrackForm = () => {
             title="Save track"
             onPress={() => {
               saveTrack();
-              navigation.navigate('TrackList');
+              navigation.navigate('TracksList');
             }}
           />
         </Spacer>

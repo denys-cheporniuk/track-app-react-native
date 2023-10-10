@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {View, StyleSheet, ActivityIndicator} from 'react-native'
+import { View, StyleSheet, ActivityIndicator } from 'react-native'
 import MapView, { Polyline, Circle } from "react-native-maps";
 import { Context as LocationContext } from '../context/LocationContext'
 import Spacer from "./Spacer";

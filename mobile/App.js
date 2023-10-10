@@ -23,15 +23,15 @@ const Tab = createMaterialBottomTabNavigator();
 
 const TrackListFlow = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="TrackList" component={TrackListScreen} />
+    <Stack.Screen name="TracksList" component={TrackListScreen} />
     <Stack.Screen name="TrackDetail" component={TrackDetailScreen} />
   </Stack.Navigator>
 );
 
 const MainFlow = () => (
   <Tab.Navigator>
-    <Tab.Screen name="TrackListFlow" component={TrackListFlow} />
-    <Tab.Screen name="TrackCreate" component={TrackCreateScreen} />
+    <Tab.Screen name="Tracks" component={TrackListFlow} />
+    <Tab.Screen name="Add Track" component={TrackCreateScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
 );
