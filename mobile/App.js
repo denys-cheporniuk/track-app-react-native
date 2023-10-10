@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
+import { FontAwesome } from "@expo/vector-icons";
 
 import {
   Provider as AuthProvider,
@@ -17,7 +18,6 @@ import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
-import {FontAwesome} from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();

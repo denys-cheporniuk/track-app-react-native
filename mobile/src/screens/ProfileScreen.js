@@ -3,20 +3,9 @@ import { View, StyleSheet, SafeAreaView } from 'react-native'
 import { Context as AuthContext } from "../context/AuthContext";
 import { Button, Text } from "react-native-elements";
 import Spacer from "../components/Spacer";
-import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
   const { signOut } = useContext(AuthContext);
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    navigation.setOptions({
-      tabBarIcon: () => (
-        <FontAwesome name="gear" size={20} />
-      ),
-    });
-  }, [navigation]);
 
   return (
     <SafeAreaView>

@@ -4,7 +4,6 @@ import { Text, ListItem } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { Context as TrackContext } from "../context/TrackContext";
 import Spacer from "../components/Spacer";
-import {FontAwesome} from "@expo/vector-icons";
 
 const TrackListScreen = () => {
   const { state, getTracks } = useContext(TrackContext);

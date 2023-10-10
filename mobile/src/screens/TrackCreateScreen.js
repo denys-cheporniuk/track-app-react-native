@@ -1,8 +1,7 @@
 import React, {useCallback, useContext, useEffect} from 'react';
 import { SafeAreaView } from 'react-native'
 import { Text } from 'react-native-elements';
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { FontAwesome } from '@expo/vector-icons';
+import { useIsFocused } from "@react-navigation/native";
 
 import { Context as LocationContext } from '../context/LocationContext'
 import Map from "../components/Map";
@@ -13,21 +12,12 @@ import Spacer from "../components/Spacer";
 const TrackCreateScreen = () => {
   const { state, addLocation } = useContext(LocationContext);
   const isInFocus = useIsFocused();
-  const navigation = useNavigation();
 
   const setLocation = useCallback((location) => {
     addLocation(location, state.recording);
   }, [state.recording])
 
   const [locationError] = useLocation(isInFocus || state.recording, setLocation);
-
-  useEffect(() => {
-    navigation.setOptions({
-      tabBarIcon: () => (
-        <FontAwesome name="plus" size={20} />
-      ),
-    });
-  }, [navigation]);
 
   return (
     <SafeAreaView>
