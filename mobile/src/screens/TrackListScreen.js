@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import { Text, ListItem } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { Context as TrackContext } from "../context/TrackContext";
 import Spacer from "../components/Spacer";
+import {FontAwesome} from "@expo/vector-icons";
 
 const TrackListScreen = () => {
   const { state, getTracks } = useContext(TrackContext);

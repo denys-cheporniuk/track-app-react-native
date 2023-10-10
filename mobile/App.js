@@ -1,4 +1,4 @@
-import {useContext, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
@@ -17,6 +17,7 @@ import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
+import {FontAwesome} from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -29,7 +30,22 @@ const TrackListFlow = () => (
 );
 
 const MainFlow = () => (
-  <Tab.Navigator>
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: () => {
+        switch (route.name) {
+          case 'Tracks':
+            return <FontAwesome name="th-list" size={20} />
+          case 'Add Track':
+            return <FontAwesome name="plus" size={20} />
+          case 'Profile':
+            return <FontAwesome name="gear" size={20} />
+          default:
+            return ''
+        }
+      },
+    })}
+  >
     <Tab.Screen name="Tracks" component={TrackListFlow} />
     <Tab.Screen name="Add Track" component={TrackCreateScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
