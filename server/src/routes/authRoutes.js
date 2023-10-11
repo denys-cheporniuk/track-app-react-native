@@ -1,3 +1,5 @@
+const keys = require('../config/keys');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
@@ -12,7 +14,7 @@ router.post('/signup', async (req, res) => {
     const user = new User({ email, password });
     await user.save();
 
-    const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY');
+    const token = jwt.sign({ userId: user._id }, keys.jwtSecretKey);
     res.send({ token });
   } catch (error) {
     return res.status(422).send(error.message);
@@ -35,7 +37,7 @@ router.post('/signin', async (req, res) => {
   try {
     await user.comparePassword(password);
 
-    const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY');
+    const token = jwt.sign({ userId: user._id }, keys.jwtSecretKey);
     res.send({ token });
   } catch (error) {
     return res.status(422).send({ error: 'Invalid password or email' });

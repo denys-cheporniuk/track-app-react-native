@@ -1,3 +1,5 @@
+const keys = require('../config/keys');
+
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
@@ -11,7 +13,7 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
-  jwt.verify(token, 'MY_SECRET_KEY', async (err, payload) => {
+  jwt.verify(token, keys.jwtSecretKey, async (err, payload) => {
     if (err) {
       return res.status(401).send({ error: 'Not authorized' });
     }

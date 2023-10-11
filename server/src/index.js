@@ -1,3 +1,5 @@
+const keys = require('./config/keys');
+
 require('./models/User');
 require('./models/Track');
 
@@ -16,7 +18,7 @@ app.use(bodyParses.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-const mongoUri = 'mongodb+srv://denyscheporniuk:GVRFqs7o8bx38eyz@track-db.kkbopwk.mongodb.net/?retryWrites=true&w=majority';
+const mongoUri = keys.mongoURI;
 mongoose.connect(mongoUri);
 mongoose.connection.on('connected', () => {
   console.log('connected to mongodb');
