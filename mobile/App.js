@@ -31,6 +31,8 @@ const TrackListFlow = () => (
 
 const MainFlow = () => (
   <Tab.Navigator
+    activeColor="blue"
+    tabB
     screenOptions={({ route }) => ({
       tabBarIcon: () => {
         switch (route.name) {
